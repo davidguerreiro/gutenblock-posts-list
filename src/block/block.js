@@ -7,7 +7,10 @@
 
 //  Import CSS.
 import './style.scss';
-import './editor.scss';
+import './editor.scss'
+
+// Import Components
+import { PostSelector } from './components/PostSelector';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -75,7 +78,10 @@ registerBlockType( 'cgb/block-guten-post-list', {
 
 			return(
 				<div className={className}>
-					<PlainText value={blockTitle} onChange={ this.onTitleChange } />
+					<div className="title-wrapper">
+						<PlainText value={blockTitle} onChange={ this.onTitleChange } />
+					</div>
+				<PostSelector/>
 				</div>
 			);
 		}
