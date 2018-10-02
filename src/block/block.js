@@ -12,6 +12,10 @@ import './editor.scss'
 // Import Components
 import { PostSelector } from './components/PostSelector';
 
+// Import Utils/
+import * as api from './utils/api';
+
+
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const { PlainText } = wp.editor;
@@ -81,7 +85,7 @@ registerBlockType( 'cgb/block-guten-post-list', {
 					<div className="title-wrapper">
 						<PlainText value={blockTitle} onChange={ this.onTitleChange } />
 					</div>
-				<PostSelector/>
+				<PostSelector api={api}/>
 				</div>
 			);
 		}

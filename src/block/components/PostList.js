@@ -3,7 +3,9 @@
  * because state will be managed by parent PostSelector component
  */
 
- const PostList = props => {
+import { Post } from './Post';
+
+ export const PostList = props => {
 	 return (
 		<div className="post-list">
             <article className="post">
@@ -17,6 +19,4 @@
         </div>
 	 );
 }
-
-export default PostList;
 

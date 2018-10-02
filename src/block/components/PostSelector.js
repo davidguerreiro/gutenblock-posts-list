@@ -1,4 +1,5 @@
-import { Postslist } from './PostList';
+import { PostList } from './PostList';
+import * as api from './../utils/api';
 
 const { Component } = wp.element;
 
@@ -7,6 +8,57 @@ export class PostSelector extends Component {
 	constructor(props) {
 		super(...arguments);
 		this.props = props;
+
+		this.state = {
+			posts: [],
+			loading: false,
+			type: 'post',
+			types: [],
+		};
+	}
+
+	componentDidMount() {
+		this.setState({
+			loading: true,
+		});
+
+		api.getPostTypes()
+			.then( ( { data = {} } = {} ) => {
+				delete data.attachment;
+				delete data.wp_block;
+				this.setState({
+					types: data,
+				}, () => {
+						this.getPosts()
+							.then(() => this.setState({loading: false}));
+				});
+			});
+
+
+	}
+
+	getPosts(args = {}) {
+		const defaultArgs = {
+			per_page: 10,
+			type: this.state.type,
+		};
+
+		const requestArguments = {
+			...defaultArgs,
+			...args,
+		};
+
+		requestArguments.restBase = this.state.types[requestArguments.type].rest_base;
+
+		// get the posts from api.getPosts ( see ./utils/api.js ) using the arguments we have just defined above.
+		return api.getPosts(requestArguments)
+				.then(response => {
+					this.setState({
+						posts: [...this.state.posts, ...response.data],
+					});
+
+					return response;
+				});
 	}
 
 	render() {
@@ -21,13 +73,19 @@ export class PostSelector extends Component {
 					<div className="filter">
 						<label htmlFor="options">Post Type: </label>
 						<select name="options" id="options">
-							<option>Loading Post types</option>
+						{ this.state.types.length < 1 ?
+							(<option value="">loading</option>) :
+							Object.keys(this.state.types).map(
+									key =>
+									<option key={key} value={key}>{this.state.types[key].name}</option>
+							)
+						}
 						</select>
 					</div>
 				</div>
 				<div className="post-selectorContainer">
-					<PostList />
-					<PostList />
+					<PostList posts={this.state.posts} loading={this.state.loading}/>
+					<PostList posts={this.state.posts} loading={this.state.loading}/>
 				</div>
 			</div>
 		);
