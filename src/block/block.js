@@ -71,10 +71,15 @@ registerBlockType( 'cgb/block-guten-post-list', {
 			this.props = props;
 
 			this.onTitleChange = this.onTitleChange.bind(this);
+			this.updateSelectedPosts = this.updateSelectedPosts.bind(this);
 		}
 
 		onTitleChange(blockTitle) {
 			this.props.setAttributes({ blockTitle });
+		}
+
+		updateSelectedPosts( selectedPosts ) {
+			this.props.setAttributes( {selectedPosts });
 		}
 
 		render() {
@@ -85,7 +90,9 @@ registerBlockType( 'cgb/block-guten-post-list', {
 					<div className="title-wrapper">
 						<PlainText value={blockTitle} onChange={ this.onTitleChange } />
 					</div>
-				<PostSelector api={api}/>
+				<PostSelector api={api} selectedPosts={this.props.attributes.selectedPosts}
+					updateSelectedPosts={this.updateSelectedPosts}
+				/>
 				</div>
 			);
 		}

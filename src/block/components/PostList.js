@@ -6,16 +6,20 @@
 import { Post } from './Post';
 
  export const PostList = props => {
+	 const { loading = false, posts = [], action = () => {} } = props;
+	 console.log( posts );
+
+	 if ( loading ) {
+		 return <p>Loading posts...</p>
+	 }
+
+	 if ( ! posts || posts.length < 1 ) {
+		 return <p>No posts.</p>
+	 }
+
 	 return (
 		<div className="post-list">
-            <article className="post">
-                <figure className="post-figure" style={{ backgroundImage: `//satyr.io/150` }}>
-                </figure>
-                <div className="post-body">
-                    <h3 className="post-title">Post 2</h3>
-                </div>
-                <button>+/-</button>
-            </article>
+           {posts.map((post) => <Post key={post.id} {...post} clickHandler={action} />)}
         </div>
 	 );
 }
