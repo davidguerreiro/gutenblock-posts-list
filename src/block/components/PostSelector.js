@@ -14,6 +14,7 @@ export class PostSelector extends Component {
 			loading: false,
 			type: 'post',
 			types: [],
+			superState: true,
 		};
 
 		this.getPosts = this.getPosts.bind(this);
