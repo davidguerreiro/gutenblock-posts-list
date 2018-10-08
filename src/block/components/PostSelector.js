@@ -27,6 +27,7 @@ export class PostSelector extends Component {
 		};
 
 		// bind 'this' to force class methods to use this 'this'
+		this.addPost = this.addPost.bind(this);
 		this.getPosts = this.getPosts.bind(this);
 		this.deletePost = this.deletePost.bind(this);
 		this.handlePostTypeChange = this.handlePostTypeChange.bind(this);
