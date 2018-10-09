@@ -6,7 +6,7 @@
 import { Post } from './Post';
 
  export const PostList = props => {
-	const { filtered = false, loading = false, posts = [], action = () => {} } = props;
+	const { filtered = false, loading = false, posts = [], action = () => {}, icon = null } = props;
 
 	// content displaying while loading results.
 	 if ( loading ) {
@@ -29,7 +29,8 @@ import { Post } from './Post';
 
 	 return (
 		<div className="post-list">
-           {posts.map((post) => <Post key={post.id} {...post} clickHandler={action} />)}
+		   {posts.map((post) => <Post key={post.id} {...post} clickHandler={action} icon={icon} />)}
+		   {props.canPaginate ? (<button onClick={props.doPagination} disabled={props.paging}>{props.paging ? 'Loading ...' : 'Load more'}</button>) : null}
         </div>
 	 );
 }
