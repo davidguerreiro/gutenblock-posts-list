@@ -36,14 +36,14 @@ const { Component } = wp.element;
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'cgb/block-guten-post-list', {
+registerBlockType( 'bigbite/postlist', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
 	title: __( 'Posts List' ), // Block title.
 	icon: 'shield', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'guten-post-list — CGB Block' ),
-		__( 'CGB Example' ),
+		__( 'guten-post-list' ),
+		__( 'David Custom Gutenberg Block' ),
 		__( 'create-guten-block' ),
 	],
 

@@ -19,11 +19,11 @@ require_once 'inc/render.php';
 
 function bb_guten_post_list_init_block() {
     register_block_type( 'bigbite/postlist', array(
-        'render_callback' => 'bb_render_post_list_block',
         'editor_script'   => 'guten_post_list-cgb-block-js',
+        'render_callback' => 'bb_render_post_list_block',
 	) );
 
-	add_filter( 'gutenberg_post_list_render_filter', 'render_guten_post_list_filter' );
+	add_filter( 'guten-post-list_render_filter', 'render_guten_post_list_filter', 99, 2 );
 }
 
 add_action( 'init', 'bb_guten_post_list_init_block' );

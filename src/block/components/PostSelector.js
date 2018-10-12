@@ -248,6 +248,8 @@ export class PostSelector extends Component {
 				.then(() => this.setState({loading: false}));
 		});
 	}
+
+
 	/**
 	 * Handles filter input change.
 	 *

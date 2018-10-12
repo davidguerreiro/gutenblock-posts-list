@@ -6,17 +6,18 @@
  * @param array $attributes
  * @return boolean
  */
+
 function bb_render_post_list_block( $attributes ) {
 	$block_title = isset( $attributes['blockTitle'] ) ? $attributes['blockTitle'] : false;
 	$selected_posts = isset( $attributes['selectedPosts'] ) ? $attributes['selectedPosts'] : false;
 
 	$object_query = new WP_Query([
-		'posts__in' => $selected_posts,
+		'post__in' => $selected_posts,
 		'post_type' => get_post_types(),
 		'order_by' => 'posts__in',
 	]);
 
-	return apply_filters( 'gutenberg_post_list_render_filter', $object_query, $block_title );
+return apply_filters( 'guten-post-list_render_filter', $object_query, $block_title );
 }
 
 /**
@@ -27,13 +28,16 @@ function bb_render_post_list_block( $attributes ) {
  * @return mixed
  */
 function render_guten_post_list_filter( $query, $title ) {
+
 	if ( ! $query->have_posts() ) {
 		return;
 	}
 
-	ob_start();
+	ob_start(); ?>
 
-	while( $query->have_posts() ) :
+	<h2><?php echo esc_html( $title ); ?></h2>
+
+	<?php while( $query->have_posts() ) :
 		$query->the_post();
 	?>
 		<article>
