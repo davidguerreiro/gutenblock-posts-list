@@ -4,7 +4,6 @@ import { uniqueByID, debounce } from './../utils/useful-funcs';
 
 const { Component } = wp.element;
 const { BlockIcon } = wp.editor;
-console.log(wp.editor);
 
 
 

@@ -11,6 +11,7 @@ import './editor.scss'
 
 // Import Components
 import { PostSelector } from './components/PostSelector';
+import { PageLink } from './components/PageLink';
 
 // Import Utils/
 import * as api from './utils/api';
@@ -55,6 +56,12 @@ registerBlockType( 'bigbite/postlist', {
 			type: 'array',
 			default: []
 		},
+		pageLinkText : {
+			type: 'string',
+		},
+		pageLinkValue : {
+			type: 'number',
+		}
 	},
 
 	/**
@@ -82,8 +89,12 @@ registerBlockType( 'bigbite/postlist', {
 			this.props.setAttributes( {selectedPosts });
 		}
 
+		updatePageLinkComponent( value ) {
+			this.props.setAttributer( {value} );
+		}
+
 		render() {
-			const { className, attributes : { blockTitle = '' } = {} } = this.props;
+			const { className, attributes : { blockTitle = '', pageLinkText = '', pageLinkValue = '' } = {} } = this.props;
 
 			return(
 				<div className={className}>
@@ -92,6 +103,10 @@ registerBlockType( 'bigbite/postlist', {
 					</div>
 				<PostSelector api={api} selectedPosts={this.props.attributes.selectedPosts}
 					updateSelectedPosts={this.updateSelectedPosts}
+				/>
+				<PageLink pageLinkText={pageLinkText}
+						  pageLinkValue={pageLinkValue}
+						  updatePageLinkComponent={this.setAttributes}
 				/>
 				</div>
 			);

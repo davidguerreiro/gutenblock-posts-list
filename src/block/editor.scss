@@ -169,4 +169,16 @@
 		font-size: 1.6em;
 		font-weight: 600;
 		}
+
+		.pagelink {
+			padding: 20px;
+			border-top: 1px solid #e6e6e6;
+			margin-top: 10px;
+
+			&__wrapper {
+				display: flex;
+				justify-content: space-between;
+			}
+		}
+
 }
